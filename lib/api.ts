@@ -116,6 +116,16 @@ export async function deleteProduct(id: string): Promise<{ success: boolean }> {
   });
 }
 
+export async function updateProduct(
+  id: string,
+  product: Partial<CreateProductInput>
+): Promise<Product> {
+  return apiFetch<Product>(`/admin/products/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(product),
+  });
+}
+
 // Orders API
 export async function createOrder(productId: string, customerEmail: string): Promise<{ checkoutUrl: string }> {
   return apiFetch<{ checkoutUrl: string }>('/orders', {
